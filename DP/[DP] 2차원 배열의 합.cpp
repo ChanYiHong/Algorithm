@@ -22,12 +22,9 @@ int main()
         }
     }
 
-    for(int i = 1; i <= m; i++){
-        for(int j = 1; j <= n; j++){
-            if(j == 1){
-                D[j][i] = D[n][i-1] + arr[j][i];
-            }
-            else D[j][i] = D[j-1][i] + arr[j][i];
+    for(int i = 1; i <= n; i++){
+        for(int j = 1; j <= m; j++){
+            D[i][j] = D[i-1][j] + D[i][j-1] - D[i-1][j-1] + arr[i][j];  
         }
     }
 
@@ -36,7 +33,7 @@ int main()
     while(T--){
         int i, j, x, y;
         cin >> i >> j >> x >> y;
-        cout << D[x][y] - D[i][j] + arr[i][j] <<'\n';
+        cout << D[x][y] - D[x][j-1] - D[i-1][y] + D[i-1][j-1] <<'\n';
     }
 
     return 0;
