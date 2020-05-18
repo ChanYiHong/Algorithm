@@ -1,6 +1,5 @@
 #include <iostream>
 #include <algorithm>
-#include <cstring>
 #include <queue>
 #include <utility>
 using namespace std;
@@ -12,7 +11,7 @@ int main()
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
     int n;
     cin >> n;
-    char color[101][101];
+    char color[100][100];
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
             cin >> color[i][j];
@@ -20,7 +19,7 @@ int main()
     }
     // RGB
     int yes = 0;
-    bool check[101][101];
+    bool check[100][100];
     
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
@@ -51,7 +50,7 @@ int main()
 
     // Color Blindness
     int no = 0;
-    bool check2[101][101];
+    bool check2[100][100];
 
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
