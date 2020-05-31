@@ -14,5 +14,14 @@ int main()
         cout << i << '\n';
     }
 
+    string name = "";
+    name = name + "hello";
+    cout << name;
+
+    int k = 1;
+    string temp = "";
+    temp += (k + '0');
+    cout << temp;
+
     return 0;
 }
