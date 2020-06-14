@@ -13,7 +13,6 @@ int jlis(int index1, int index2)
     int& ret = D[index1+1][index2+1];
     if(ret != -1) return ret;
     ret = 2;
-
     long long a = (index1 == -1 ? NEGINF : arr1[index1]);
     long long b = (index2 == -1 ? NEGINF : arr2[index2]);
     long long maxElement = max(a, b);
@@ -27,11 +26,8 @@ int jlis(int index1, int index2)
             ret = max(ret, jlis(index1, next2) + 1);
         }
     }
-
     return ret;
-
 }
-
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
@@ -46,7 +42,7 @@ int main()
             cin >> arr2[i];
         }
         memset(D, -1, sizeof(D));
-        int res = jlis(0, 0);
+        int res = jlis(-1, -1);
         cout << res << '\n';
     }
     return 0;
