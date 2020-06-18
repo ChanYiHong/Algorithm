@@ -7,8 +7,9 @@ int D[1001][1001];
 
 int dp(int N, int K){
     
-    if(K == 1 || N == 1) return 1;
-    if(K == 0) return 0;  
+    if(K == 0) return 1;
+    if(K == 1) return N;
+    if(N == 1) return 0;  
     int& ret = D[N][K];
     if(ret != -1) return ret;
     
