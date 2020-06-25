@@ -1,40 +1,50 @@
 #include <iostream>
 #include <algorithm>
 #include <cstring>
+#include <vector>
 using namespace std;
 int dx[4] = {0, 0, -1, 1};
 int dy[4] = {-1, 1, 0, 0};
 int arr[501][501];
 int D[501][501];
-int n, m;
+int N, M;
 
-int dfs(int row, int col){
-    if(D[row][col] != -1) return D[row][col];
-    if(row < 0 && row >= n && col < 0 && col >= m) return 0;
-    if(row == 0 && col == 0) return 1;
-    D[row][col] = 0;
-    for(int k = 0; k < 4; k++){
-        int x = row + dx[k];
-        int y = col + dy[k];
-        
-        if(arr[x][y] > arr[row][col]){
-            D[row][col] += dfs(x, y);
+int dp(int x, int y, vector<vector<bool> >& m)
+{
+    if(D[x][y]!= -1) return D[x][y];
+    if(x == N-1 && y == M-1) {
+        return 1;
+    }
+
+    m[x][y] = true;
+    D[x][y] = 0;
+    for(int i = 0; i < 4; i++){
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        if(nx>=0 && nx < N && ny>=0 && ny < M){
+            if(arr[x][y] > arr[nx][ny] && !m[nx][ny]){
+                m[nx][ny] = true;
+                D[x][y] += dp(nx, ny, m);
+                m[nx][ny] = false;
+            }
         }
     }
-    return D[row][col];
+    return D[x][y];
 }
 
 int main()
 {
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
-    cin >> m >> n;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++){
+    cin >> N >> M;
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < M; j++){
             cin >> arr[i][j]; 
         }
     }
     memset(D, -1, sizeof(D));
-    cout << dfs(n-1, m-1);
-    
+    vector<vector<bool> > map;
+    map.resize(N, vector<bool>(M));
+    int res = dp(0, 0, map);
+    cout << res;
     return 0;
 }
