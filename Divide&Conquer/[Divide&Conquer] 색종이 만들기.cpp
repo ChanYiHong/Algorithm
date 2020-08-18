@@ -49,7 +49,6 @@ int main()
     }
     divide(0, 0, n);
     cout << white << '\n';
-    cout << blue;
     return 0;
 }
 
