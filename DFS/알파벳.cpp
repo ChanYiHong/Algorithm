@@ -2,48 +2,42 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <queue>
+#include <utility>
+
 
 using namespace std;
 
 vector<vector<char> > board;
+vector<vector<int> > check;
 map<char, int> m;
-vector<vector<bool> > check;
 int dx[4] = {1, -1, 0, 0};
 int dy[4] = {0, 0, 1, -1};
 int R, C;
 
-int dfs(char alpha, int x, int y){
-
-    cout << alpha << " " << x << " " << y << '\n';
-
-    m[alpha]++;
-
-    cout << m[alpha] << '\n';
+int dfs(int x, int y){
 
     int ret = 1;
     int maximum = 0;
 
-    for(int c = 0; c < 4; c++){
-        cout << "포문시작이요" << '\n';
-        int nx = x + dx[c];
-        int ny = y + dy[c];
-        char k = board[nx][ny];
-        cout << k << '\n';
-        cout << m[k] << '\n';
+    for(int i = 0; i < 4; i++){
+        int nx = x + dx[i];
+        int ny = y + dy[i];
 
         if(nx >= 0 && nx < R && ny >= 0 && ny < C){
+            char k = board[nx][ny];
             
             if(m[k] == 0 && !check[nx][ny]){
+                m[k]++;
                 check[nx][ny] = true;
-                maximum = max(maximum, dfs(k, nx, ny));
+                int t = dfs(nx, ny);
+                maximum = max(maximum, t);
                 check[nx][ny] = false;
+                m[k]--;
             }
         }
     }
     ret += maximum;
-
-    cout << ret << '\n';
-
     return ret;
 }
 
@@ -57,16 +51,17 @@ int main()
     R = r; C = c;
 
     board.resize(R, vector<char>(C));
-    check.resize(R, vector<bool>(C));
+    check.resize(R, vector<int>(C, 0));
 
     for(int i = 0; i < R; i++){
         for(int j = 0; j < C; j++){
             cin >> board[i][j];
         }
     }
-
+    
+    m[board[0][0]]++;
     check[0][0] = true;
-    int ret = dfs(board[0][0], 0, 0);
+    int ret = dfs(0, 0);
 
     cout << ret;
 
