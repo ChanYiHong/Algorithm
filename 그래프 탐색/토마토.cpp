@@ -91,32 +91,22 @@ int main()
             }
         }
     }
-
     int ans = 0;
+    bool isThereZero = false;
     for(int k = 0; k < H; k++){
         for(int i = 0; i < N; i++){
             for(int j = 0; j < M; j++){
                 if(check[i][j][k] == 0){
                     ans = -1;
+                    isThereZero = true;
                     break;
                 }
                 ans = max(ans, check[i][j][k]);
             }
+            if(isThereZero) break;
         }
+        if(isThereZero) break;
     }
-
-    for(int k = 0; k < H; k++){
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < M; j++){
-                cout << check[i][j][k] << " ";
-            }
-            cout <<'\n';
-        }
-        cout <<'\n';
-    }
-    
-    cout << isAllOne <<'\n';
-    cout << ans << '\n';
 
     if(isAllOne) cout << 0;
     else if(ans == -1) cout << ans;
