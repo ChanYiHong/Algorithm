@@ -79,11 +79,11 @@ int dy[4] = {0, 0, 1, -1};
 void bfs()
 {
     queue<vector<int> > q;
-    check[0][0][0] = 1;
+    check[0][0][0] = 1; // 0 이 벽을 아직 안뿌신 상태
     // c++ 11 이 아니라 ㅡㅡ;
     vector<int> temp;
-    temp.push_back(0);
-    temp.push_back(0);
+    temp.push_back(0); // x좌표
+    temp.push_back(0); // y좌표
     temp.push_back(0); // wall;
     temp.push_back(1); // cnt;
     q.push(temp);
@@ -121,7 +121,7 @@ void bfs()
                     check[nx][ny][wall] = true;
                     q.push(temp);
                 }
-                if(check[nx][ny][wall] == 0 && board[nx][ny] == 0){
+                if(!check[nx][ny][wall] && board[nx][ny] == 0){
                     vector<int> temp;
                     temp.push_back(nx);
                     temp.push_back(ny);
