@@ -11,14 +11,8 @@ int cnt = 0;
 
 void dfs(int x){
 
-    cout << x << '\n';
-
-    if(check[x]!= -1 && cnt - check[x] >= 2){
+    if(check[x] != -1){
         ans++;
-        return;
-    }
-
-    if(cnt - check[x] == 1){
         return;
     }
 
@@ -50,6 +44,7 @@ int main()
             int temp; cin >> temp;
             num[i].push_back(temp);
         }
+
 
         for(int i = 1; i <= n; i++){
             if(check[i] == -1){
