@@ -1,47 +1,33 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <queue>
 #define INF 987654321
 
 using namespace std;
 
 vector<vector<int> > v;
-vector<bool> check;
+vector<int> check;
 int N;
-int minimum = INF;
+queue<int> q;
 
-void dfs(int x, int dst, int cnt){
+void bfs(int start)
+{
+    q.push(start);
+    check[start] = 0; 
 
-    if(x == dst){
-        minimum = min(minimum, cnt);
-        return;
-    }
+    while(!q.empty()){
+        int x = q.front();
+        q.pop();
 
-    for(int i = 0; i < v[x].size(); i++){
-        int next = v[x][i];
-
-        if(!check[next]){
-            check[next] = true;
-            dfs(next, dst, cnt+1);
-            check[next] = false;
+        for(int i = 0; i < v[x].size(); i++){
+            int nx = v[x][i];
+            if(check[nx] == -1){
+                check[nx] = check[x] + 1;
+                q.push(nx);
+            }
         }
     }
-}
-
-int kevin(int x)
-{
-    int ret = 0;
-
-    for(int i = 1; i <= N; i++){
-        if(i == x) continue;
-        check.resize(N+1, false);
-        dfs(x, i, 0);
-        ret += minimum;
-        minimum = INF;
-        check.clear();
-    }
-
-    return ret;
 }
 
 int main()
@@ -53,7 +39,7 @@ int main()
 
     N = n;
 
-    v.resize(n+1, vector<int>());
+    v = vector<vector<int> >(n+1);
 
     for(int i = 0; i < m; i++){
         int x1, x2;
@@ -64,13 +50,22 @@ int main()
     }
 
     int index;
-    int cnt = INF;
-    for(int i = 1; i <= m; i++){
-        int ret = kevin(i);
-        if(cnt > ret){
-            index = i;
-            cnt = ret;
+    int minimum = INF;
+    for(int i = 1; i <= n; i++){
+        
+        check.resize(n+1, -1);
+        bfs(i);
+
+        int sum = 0;
+        for(int j = 1; j <= n; j++){
+            if(i == j) continue;
+            sum += check[j];
         }
+        if(minimum > sum){
+            minimum = sum;
+            index = i;
+        }
+        check.clear();
     }
 
     cout << index;
