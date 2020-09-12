@@ -5,27 +5,29 @@
 
 using namespace std;
 
+// 현재 vs code 버전 때문에 make_heap, pop_heap, push_heap이 오류가 떠 주석처리
+// 프로그래머스 사이트에서는 정상 컴파일
 int solution(vector<int> scoville, int K) {
     int answer = 0;
     
     // Min Heap 생성
-    make_heap(scoville.begin(), scoville.end(), greater<int>());
+    //make_heap(scoville.begin(), scoville.end(), greater<int>());
     
     while(scoville[0] < K && scoville.size() >= 2){
         
         // Min Heap 의 Root Node 값을 pop. vector의 맨 뒤로 가게 된다.
-        pop_heap(scoville.begin(), scoville.end(), greater<int>());
+        //pop_heap(scoville.begin(), scoville.end(), greater<int>());
         // 맨 뒤 값을 임시 저장 후 pop.
         int n1 = scoville.back();
         scoville.pop_back();
         
-        pop_heap(scoville.begin(), scoville.end(), greater<int>());
+        //pop_heap(scoville.begin(), scoville.end(), greater<int>());
         int n2 = scoville.back();
         scoville.pop_back();
         
         int res = n1 + (n2 * 2);
         scoville.push_back(res);
-        push_heap(scoville.begin(), scoville.end(), greater<int>());
+        //push_heap(scoville.begin(), scoville.end(), greater<int>());
         
         answer++;
     }
