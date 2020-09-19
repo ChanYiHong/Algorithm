@@ -50,7 +50,7 @@ int main()
         }
     }
 
-    for(int i = 0; i < dist.size(); i++){
+    for(int i = 1; i < dist.size(); i++){
         if(dist[i] == INF){
             cout << "INF" << '\n';
         }
