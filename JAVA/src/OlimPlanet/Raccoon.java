@@ -11,6 +11,15 @@ public class Raccoon {
 
     }
 
+    /**
+     1 : 4 (2)
+     2 : 6 (4)
+     3 : 10 (6)
+     4 : 16 (10)
+     5 : 26 (16)
+     6 : 42 (26)
+     ...
+     **/
     private static int solve(int n) {
 
         int adult = 2;
@@ -23,15 +32,5 @@ public class Raccoon {
 
         return num;
     }
-
-    /**
-        1 : 4 (2)
-        2 : 6 (4)
-        3 : 10 (6)
-        4 : 16 (10)
-        5 : 26 (16)
-        6 : 42 (26)
-        ...
-     **/
 
 }
