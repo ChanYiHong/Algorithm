@@ -78,11 +78,9 @@ public class WhyHomeViewNeeded {
             for (int j = 0; j < len - i; j++) {
                 if (i == j) continue;
 
-                int node1 = i;
-                int node2 = j;
                 int weight = input[i][j];
 
-                pq.offer(new Edge(node1, node2, weight));
+                pq.offer(new Edge(i, j, weight));
 
             }
         }
